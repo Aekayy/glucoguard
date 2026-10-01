@@ -1,0 +1,380 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─────────────────────────────────────────────────────────
+ * Hearth tokens — mirrors the Figma "Hearth · Color" collection
+ * (Light / Dark modes). Names are semantic so a component never
+ * knows a hex value.
+ * ───────────────────────────────────────────────────────── */
+:root {
+  --canvas: #f3eeea;
+  --surface: #fffdfb;
+  --sunken: #ede6e1;
+  --ink: #241b25;
+  --ink-2: #6e6270;
+  --ink-3: #9a8e97;
+  --line: #e6ddd8;
+  --brand: #5a2b5e;
+  --on-brand: #ffffff;
+  --tint: #f0e4ef;
+  --sage: #e6eee7;
+  --info: #3e6a9c;
+  --info-tint: #e4e8ee;
+  --vlow: #9b1c31;
+  --vlow-tint: #f1dedf;
+  --low: #c8452f;
+  --low-tint: #f7e3de;
+  --inr: #3d8b5a;
+  --inr-tint: #e4ede4;
+  --high: #b57e10;
+  --high-tint: #f7edda;
+  --vhigh: #b8612b;
+  --vhigh-tint: #f5e7de;
+  --nod: #9a8e97;
+  --nod-tint: #f1eded;
+  --scrim: rgb(36 27 37 / 42%);
+
+  /* names the kobra components read */
+  --foreground: var(--ink);
+  --popover: var(--ink);
+  --destructive: var(--low);
+  --muted-foreground: var(--ink-2);
+  --ring: var(--brand);
+  --error: var(--vlow);
+  --warning: var(--high);
+  --success: var(--inr);
+  --shell-fg-muted: var(--ink-2);
+  --shell-fg-faint: var(--ink-3);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  color-scheme: light;
+}
+
+.dark {
+  --canvas: #151114;
+  --surface: #221c21;
+  --sunken: #1b1619;
+  --ink: #f2eaee;
+  --ink-2: #b5a7b2;
+  --ink-3: #8a7d87;
+  --line: #3a3038;
+  --brand: #dba8de;
+  --on-brand: #1a1519;
+  --tint: #33253a;
+  --sage: #1f2b24;
+  --info: #8fb6e3;
+  --info-tint: #3a3e4c;
+  --vlow: #ff6f86;
+  --vlow-tint: #532e37;
+  --low: #ff8f73;
+  --low-tint: #533533;
+  --inr: #6fcb92;
+  --inr-tint: #33423a;
+  --high: #edc060;
+  --high-tint: #4f402f;
+  --vhigh: #e99a62;
+  --vhigh-tint: #4e382f;
+  --nod: #7e717b;
+  --nod-tint: #362f35;
+  --scrim: rgb(0 0 0 / 60%);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-on-brand: var(--on-brand);
+  --color-tint: var(--tint);
+  --color-sage: var(--sage);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+  --color-vlow: var(--vlow);
+  --color-vlow-tint: var(--vlow-tint);
+  --color-low: var(--low);
+  --color-low-tint: var(--low-tint);
+  --color-inr: var(--inr);
+  --color-inr-tint: var(--inr-tint);
+  --color-high: var(--high);
+  --color-high-tint: var(--high-tint);
+  --color-vhigh: var(--vhigh);
+  --color-vhigh-tint: var(--vhigh-tint);
+  --color-nod: var(--nod);
+  --color-nod-tint: var(--nod-tint);
+  --color-scrim: var(--scrim);
+
+  --color-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-destructive: var(--destructive);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-shell-fg-muted: var(--shell-fg-muted);
+  --color-shell-fg-faint: var(--shell-fg-faint);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --font-sans: 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-rounded: 'SF Pro Rounded', ui-rounded, 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  --shadow-card: 0 2px 6px rgb(36 27 37 / 6%);
+  --shadow-toast: 0 8px 24px rgb(0 0 0 / 18%);
+  --shadow-modal: 0 24px 60px rgb(0 0 0 / 18%);
+}
+
+/* ── Text styles (Figma: iOS/*, Numeric/*, Label/*, Web/*) ── */
+@utility type-large-title { font-family: var(--font-rounded); font-weight: 700; font-size: 34px; line-height: 41px; letter-spacing: 0.4px; }
+@utility type-title1 { font-family: var(--font-rounded); font-weight: 700; font-size: 28px; line-height: 34px; letter-spacing: 0.4px; }
+@utility type-title2 { font-family: var(--font-rounded); font-weight: 600; font-size: 22px; line-height: 28px; letter-spacing: 0.3px; }
+@utility type-title3 { font-family: var(--font-sans); font-weight: 600; font-size: 20px; line-height: 25px; letter-spacing: 0.2px; }
+@utility type-headline { font-family: var(--font-sans); font-weight: 600; font-size: 17px; line-height: 22px; letter-spacing: -0.4px; }
+@utility type-body { font-family: var(--font-sans); font-weight: 400; font-size: 17px; line-height: 22px; letter-spacing: -0.4px; }
+@utility type-callout { font-family: var(--font-sans); font-weight: 400; font-size: 16px; line-height: 21px; letter-spacing: -0.3px; }
+@utility type-subhead { font-family: var(--font-sans); font-weight: 400; font-size: 15px; line-height: 20px; letter-spacing: -0.2px; }
+@utility type-subhead-em { font-family: var(--font-sans); font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.2px; }
+@utility type-footnote { font-family: var(--font-sans); font-weight: 400; font-size: 13px; line-height: 18px; letter-spacing: -0.1px; }
+@utility type-footnote-em { font-family: var(--font-sans); font-weight: 600; font-size: 13px; line-height: 18px; letter-spacing: -0.1px; }
+@utility type-caption1 { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 16px; }
+@utility type-caption2 { font-family: var(--font-sans); font-weight: 500; font-size: 11px; line-height: 13px; letter-spacing: 0.6px; }
+@utility type-num-hero { font-family: var(--font-rounded); font-weight: 600; font-size: 76px; line-height: 76px; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+@utility type-num-lg { font-family: var(--font-rounded); font-weight: 600; font-size: 34px; line-height: 40px; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+@utility type-num-md { font-family: var(--font-rounded); font-weight: 600; font-size: 22px; line-height: 26px; font-variant-numeric: tabular-nums; }
+@utility type-eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 11px; line-height: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+@utility type-display { font-family: var(--font-rounded); font-weight: 700; font-size: 30px; line-height: 36px; letter-spacing: 0.2px; }
+@utility type-h1 { font-family: var(--font-rounded); font-weight: 600; font-size: 22px; line-height: 28px; letter-spacing: 0.2px; }
+@utility type-h2 { font-family: var(--font-sans); font-weight: 600; font-size: 16px; line-height: 22px; letter-spacing: -0.2px; }
+@utility type-wbody { font-family: var(--font-sans); font-weight: 400; font-size: 14px; line-height: 20px; letter-spacing: -0.1px; }
+@utility type-wbody-em { font-family: var(--font-sans); font-weight: 600; font-size: 14px; line-height: 20px; letter-spacing: -0.1px; }
+@utility type-small { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 16px; }
+@utility type-small-em { font-family: var(--font-sans); font-weight: 500; font-size: 12px; line-height: 16px; }
+@utility type-wnum { font-family: var(--font-rounded); font-weight: 600; font-size: 20px; line-height: 24px; font-variant-numeric: tabular-nums; }
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+ * Input OTP (kobra) — tokens + keyframes, unlayered
+ * ───────────────────────────────────────────────────────── */
+:root {
+  --otp-wave-duration: 1150ms;
+  --otp-wave-stagger: 70ms;
+  --otp-wave-dim: 0.28;
+  --otp-wave-ease: ease-in-out;
+  --otp-trail-duration: 400ms;
+  --otp-trail-stagger: 45ms;
+  --otp-trail-width: 3px;
+  --otp-trail-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --otp-success-duration: 340ms;
+  --otp-success-stagger: 48ms;
+  --otp-success-width: 3px;
+  --otp-success-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --otp-bounce-duration: 420ms;
+  --otp-bounce-lift: 8px;
+  --otp-trail-color: rgb(90 43 94 / 45%);
+  --otp-success-color: var(--inr);
+}
+.dark {
+  --otp-trail-color: rgb(219 168 222 / 55%);
+  --otp-success-color: var(--inr);
+}
+.otp-processing {
+  animation: otp-processing var(--otp-wave-duration) var(--otp-wave-ease) calc(var(--otp-wave-index) * var(--otp-wave-stagger)) infinite both;
+  will-change: opacity;
+}
+.otp-trail {
+  animation: otp-trail var(--otp-trail-duration) var(--otp-trail-ease) calc(var(--otp-trail-index) * var(--otp-trail-stagger)) forwards;
+}
+@keyframes otp-trail {
+  from { box-shadow: 0 0 0 var(--otp-trail-width) var(--otp-trail-color); }
+  to { box-shadow: 0 0 0 0 transparent; }
+}
+.otp-trail-success {
+  animation: otp-trail-success var(--otp-success-duration) cubic-bezier(0.33, 0, 0.67, 1) calc(var(--otp-trail-index) * var(--otp-success-stagger)) forwards;
+}
+@keyframes otp-trail-success {
+  0%, 24% { box-shadow: 0 0 0 var(--otp-success-width) var(--otp-success-color); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.otp-bounce {
+  animation: otp-bounce var(--otp-bounce-duration) linear calc(var(--otp-trail-index) * var(--otp-success-stagger)) forwards;
+  will-change: transform;
+}
+@keyframes otp-bounce {
+  0% { transform: translateY(0); animation-timing-function: var(--otp-trail-ease); }
+  22% { transform: translateY(calc(var(--otp-bounce-lift) * -1)); animation-timing-function: linear; }
+  38% { transform: translateY(calc(var(--otp-bounce-lift) * -1)); animation-timing-function: cubic-bezier(0.4, 0, 0.5, 1); }
+  60% { transform: translateY(calc(var(--otp-bounce-lift) * 0.3)); animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1); }
+  78% { transform: translateY(calc(var(--otp-bounce-lift) * -0.15)); animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1); }
+  92% { transform: translateY(calc(var(--otp-bounce-lift) * 0.06)); animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1); }
+  100% { transform: translateY(0); }
+}
+@keyframes otp-processing {
+  0%, 40%, 100% { opacity: 1; }
+  16% { opacity: var(--otp-wave-dim); }
+}
+
+/* ─────────────────────────────────────────────────────────
+ * Sound toggle (kobra)
+ * ───────────────────────────────────────────────────────── */
+.sound-slash {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.02;
+  --slash-ms: 200ms;
+  transition: stroke-dashoffset var(--slash-ms) var(--ease-out);
+}
+[data-muted='true'] .sound-slash { stroke-dashoffset: 0; --slash-ms: 260ms; }
+.sound-wave {
+  transform-box: view-box;
+  transform-origin: 11px 12px;
+  transition: opacity 130ms var(--ease-out) var(--wave-delay), transform 130ms var(--ease-out) var(--wave-delay), filter 130ms var(--ease-out) var(--wave-delay);
+}
+[data-muted='true'] .sound-wave { opacity: 0; transform: scale(0.25); filter: blur(1px); }
+.sound-wave-inner { --wave-delay: 45ms; }
+.sound-wave-outer { --wave-delay: 20ms; }
+[data-muted='true'] .sound-wave-inner { --wave-delay: 50ms; }
+[data-muted='true'] .sound-wave-outer { --wave-delay: 75ms; }
+.sound-speaker {
+  --speaker-ms: 220ms;
+  --speaker-delay: 0ms;
+  transition: transform var(--speaker-ms) var(--ease-out) var(--speaker-delay);
+}
+[data-muted='true'] .sound-speaker { transform: translateX(5.5px); --speaker-ms: 260ms; --speaker-delay: 80ms; }
+
+/* ─────────────────────────────────────────────────────────
+ * Toast (kobra) — pill restyled to the Hearth toast spec
+ * ───────────────────────────────────────────────────────── */
+:root {
+  --toast-morph-duration: 300ms;
+  --toast-morph-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+.toast-pill {
+  box-shadow: 0 1px 2px rgb(0 0 0 / 18%), 0 8px 24px rgb(0 0 0 / 20%), 0 0 0 1px rgb(255 255 255 / 10%);
+  transition: padding var(--toast-morph-duration) var(--toast-morph-ease);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .toast-pill { background: var(--ink); backdrop-filter: none; }
+}
+
+/* status badge: spinner that settles into a check (toast pending → success) */
+.status-spin { animation: status-spin 800ms linear infinite; transform-origin: center; }
+@keyframes status-spin { to { transform: rotate(360deg); } }
+.status-check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: status-check 260ms var(--ease-out) 80ms forwards;
+}
+@keyframes status-check { to { stroke-dashoffset: 0; } }
+
+/* ─────────────────────────────────────────────────────────
+ * Approval card (beautifului) entrance keyframes
+ * ───────────────────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ─────────────────────────────────────────────────────────
+ * Care circle illustration (Welcome · O2)
+ * The circle revolves; "You" carries a faint heartbeat whose
+ * ripple reaches each person in turn.
+ * ───────────────────────────────────────────────────────── */
+:root {
+  --orbit-period: 48s;
+  --beat-period: 1.4s;
+}
+.orbit-spin { animation: orbit-spin var(--orbit-period) linear infinite; }
+.orbit-counter { animation: orbit-spin var(--orbit-period) linear infinite reverse; }
+.orbit-dash { animation: orbit-dash 6s linear infinite; }
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes orbit-dash { to { stroke-dashoffset: -28; } }
+
+.heartbeat { animation: heartbeat var(--beat-period) var(--ease-out) infinite; transform-origin: center; }
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  12% { transform: scale(1.06); }
+  24% { transform: scale(1); }
+  36% { transform: scale(1.035); }
+  56%, 100% { transform: scale(1); }
+}
+.beat-ripple { animation: beat-ripple var(--beat-period) var(--ease-out) infinite; transform-origin: center; }
+@keyframes beat-ripple {
+  0% { transform: scale(1); opacity: 0.32; }
+  70%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.beat-reach { animation: beat-reach var(--beat-period) ease-out infinite; }
+@keyframes beat-reach {
+  0%, 30% { box-shadow: 0 0 0 0 rgb(90 43 94 / 0%); }
+  45% { box-shadow: 0 0 0 5px rgb(90 43 94 / 14%); }
+  80%, 100% { box-shadow: 0 0 0 9px rgb(90 43 94 / 0%); }
+}
+
+/* ── Shared motion ── */
+.live-dot { animation: live-dot 1.6s ease-out infinite; }
+@keyframes live-dot {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent); }
+  80%, 100% { box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent); }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--sunken) 0%, color-mix(in srgb, var(--sunken) 55%, var(--surface)) 50%, var(--sunken) 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.2s linear infinite;
+}
+@keyframes skeleton { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+.press { transition: transform 120ms var(--ease-out), opacity 120ms var(--ease-out); }
+.press:active:not(:disabled) { transform: scale(0.97); }
+
+@media (prefers-reduced-motion: reduce) {
+  .otp-processing, .otp-trail, .otp-trail-success, .otp-bounce { animation: none; }
+  .sound-slash, .sound-wave, .sound-speaker { transition: none; }
+  .toast-pill { transition: none; }
+  .orbit-spin, .orbit-counter, .orbit-dash, .beat-ripple, .beat-reach { animation: none; }
+  .heartbeat { animation: heartbeat-soft var(--beat-period) ease-in-out infinite; }
+  .live-dot, .skeleton { animation: none; }
+  .press:active:not(:disabled) { transform: none; opacity: 0.8; }
+}
+@keyframes heartbeat-soft {
+  0%, 100% { opacity: 1; }
+  15% { opacity: 0.86; }
+}
+
+/* scrollbars inside the phone stay invisible, like iOS */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
