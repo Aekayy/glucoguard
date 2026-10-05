@@ -370,7 +370,7 @@ export function Escalating() {
       <CircleStatus
         rows={[
           { initials: 'MO', tone: 'sage', label: 'Maria is being called', meta: calling, metaClass: 'text-low tabular-nums', live: true, strong: true },
-          { initials: 'NR', tone: 'neutral', label: 'Your care team', meta: 'at 3:23' },
+          { initials: 'JH', tone: 'neutral', label: 'Your care team', meta: 'at 3:23' },
           { initials: '911', tone: 'neutral', label: 'Emergency services', meta: 'at 3:33' },
         ]}
       />
@@ -431,7 +431,7 @@ export function MariaComing() {
       <CircleStatus
         rows={[
           { initials: 'MO', tone: 'sage', label: 'Maria · on her way', meta: 'ETA 3:31', metaClass: 'text-inr' },
-          { initials: 'NR', tone: 'neutral', label: 'Northside care team', meta: 'Told 3:23' },
+          { initials: 'JH', tone: 'neutral', label: 'JHF care team', meta: 'Told 3:23' },
           { initials: '911', tone: 'neutral', label: 'Emergency services', meta: 'Paused' },
         ]}
       />
@@ -472,7 +472,7 @@ export function Ems() {
           </div>
         ))}
       </div>
-      <p className="type-footnote text-ink-2">Maria and Northside have been told.</p>
+      <p className="type-footnote text-ink-2">Maria and your JHF care team have been told.</p>
       <Bottom>
         <Button variant="destructive" onClick={() => toast({ message: 'Connecting you to 911…', state: 'warning' })}>
           Call 911
@@ -532,7 +532,7 @@ export function Summary() {
           },
         ]}
         labels={{ sentMessage: 'Sent to Priya · she reads it today', customPlaceholder: 'Something else…' }}
-        onSubmitted={() => toast({ message: 'Shared with Northside care team', state: 'success' })}
+        onSubmitted={() => toast({ message: 'Shared with your JHF care team', state: 'success' })}
       />
     </Screen>
   )
@@ -563,8 +563,8 @@ export function Sms() {
           from: 'gg',
           text:
             code === '1'
-              ? 'Thank you, Maria. We told Denise and paused the 911 call. Her care team at Northside has been told. We’ll text you when she’s back in range.'
-              : 'Calling 911 now with Denise’s address and door code. Northside has been told. Stay on the line if they call you.',
+              ? 'Thank you, Maria. We told Denise and paused the 911 call. Her care team at Jewish Healthcare Foundation has been told. We’ll text you when she’s back in range.'
+              : 'Calling 911 now with Denise’s address and door code. Her care team has been told. Stay on the line if they call you.',
         },
       ])
       playSound('notification')

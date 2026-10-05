@@ -346,9 +346,9 @@ export function Sidebar({ active, counts }: { active: NavId; counts: { queue: nu
         <span className="type-h1 text-ink">GlucoGuard</span>
       </a>
       <div className="flex items-center gap-2.5 rounded-sm border border-line bg-surface p-2.5">
-        <span className="flex size-8 items-center justify-center rounded-[8px] bg-sage type-small-em text-ink">NE</span>
+        <span className="flex size-8 items-center justify-center rounded-[8px] bg-sage type-small-em text-ink">JH</span>
         <span className="flex flex-1 flex-col">
-          <span className="type-wbody-em text-ink">Northside Health</span>
+          <span className="type-wbody-em leading-[18px] text-ink">Jewish Healthcare Foundation</span>
           <span className="type-small text-ink-2">Endocrine RPM · 214</span>
         </span>
         <Icon name="chevD" size={16} className="text-ink-2" />

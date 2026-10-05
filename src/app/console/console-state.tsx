@@ -55,8 +55,8 @@ const AUDIT: AuditEntry[] = [
   { time: '3:18 AM', who: 'System', action: 'Called caregiver', details: 'Maria Okafor · (312) 555-0187', device: 'Server' },
   { time: '3:13 AM', who: 'System', action: 'Urgent alarm', details: 'Patient did not respond', device: 'Server' },
   { time: '3:03 AM', who: 'System', action: 'Low alert', details: '58 mg/dL · Overnight urgent low v3', device: 'Server' },
-  { time: '9:40 AM', who: 'Priya Shah, RN', action: 'Viewed chart', details: 'Overview tab · 4 min', device: 'MacBook · Northside VPN' },
-  { time: '9:34 AM', who: 'Priya Shah, RN', action: 'Sent message', details: 'Care plan change explained', device: 'MacBook · Northside VPN' },
+  { time: '9:40 AM', who: 'Priya Shah, RN', action: 'Viewed chart', details: 'Overview tab · 4 min', device: 'MacBook · JHF VPN' },
+  { time: '9:34 AM', who: 'Priya Shah, RN', action: 'Sent message', details: 'Care plan change explained', device: 'MacBook · JHF VPN' },
 ]
 
 export type ConsoleState = {
@@ -100,7 +100,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
   const [s, setS] = useState(INITIAL)
   const set = useCallback<Ctx['set']>((patch) => setS((cur) => ({ ...cur, ...(typeof patch === 'function' ? patch(cur) : patch) })), [])
   const log = useCallback<Ctx['log']>(
-    (e) => setS((cur) => ({ ...cur, audit: [{ device: 'MacBook · Northside VPN', ...e }, ...cur.audit] })),
+    (e) => setS((cur) => ({ ...cur, audit: [{ device: 'MacBook · JHF VPN', ...e }, ...cur.audit] })),
     [],
   )
   const reset = useCallback(() => setS(INITIAL), [])

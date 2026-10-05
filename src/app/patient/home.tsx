@@ -263,7 +263,7 @@ export function AddLog() {
       <Field label="Time" value={time} onChange={setTime} />
       <div className="flex items-start gap-2.5 rounded-md bg-canvas p-3.5">
         <Icon name="care" size={20} className="shrink-0 text-ink-2" />
-        <span className="type-footnote text-ink-2">Logs are shared with Northside so your care team can spot patterns.</span>
+        <span className="type-footnote text-ink-2">Logs are shared with Jewish Healthcare Foundation so your care team can spot patterns.</span>
       </div>
     </Screen>
   )
@@ -294,7 +294,7 @@ export function Trends() {
     <Screen tabs gap={10}>
       <div className="flex items-center justify-between">
         <h1 className="type-large-title text-ink">Trends</h1>
-        <button type="button" onClick={() => toast({ message: 'Report shared with Northside', state: 'success' })} className="flex items-center gap-1 type-subhead-em text-brand">
+        <button type="button" onClick={() => toast({ message: 'Report shared with your JHF care team', state: 'success' })} className="flex items-center gap-1 type-subhead-em text-brand">
           <Icon name="share" size={18} /> Share
         </button>
       </div>

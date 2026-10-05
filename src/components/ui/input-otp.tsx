@@ -34,7 +34,7 @@ const RING_TRAVEL = 0.42
 const DIGIT_SPRING = { type: 'spring', duration: 0.3, bounce: 0.2 } as const
 
 const DIGITS = '^[0-9\\u0660-\\u0669\\u06f0-\\u06f9]+$'
-/* Clinic join codes are printed on paper as letters and digits (NS4·72K). */
+/* Clinic join codes are printed on paper as letters and digits (JH4·72K). */
 const ALPHANUMERIC = '^[A-Za-z0-9]+$'
 
 type OTPMode = 'numeric' | 'alphanumeric'

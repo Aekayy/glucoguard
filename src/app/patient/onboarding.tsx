@@ -149,7 +149,7 @@ export function Join() {
     }
     setStatus('checking')
     const t = setTimeout(() => {
-      if (code === 'NS472K') {
+      if (code === 'JH472K') {
         setStatus('ok')
         setTimeout(() => nav.push('join-found'), 750)
       } else setStatus('invalid')
@@ -189,18 +189,18 @@ export function Join() {
             className="flex items-start gap-2 type-footnote text-low"
           >
             <Icon name="alert" size={18} className="shrink-0" />
-            This code expired on Sep 20. Ask Northside Health for a new one, or call (312) 555-0142.
+            This code expired on Sep 20. Ask Jewish Healthcare Foundation for a new one, or call (312) 555-0142.
           </motion.div>
         ) : (
           <motion.p key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="type-footnote text-ink-3">
-            {status === 'checking' ? 'Checking with Northside…' : 'Demo code: NS472K'}
+            {status === 'checking' ? 'Checking with Jewish Healthcare Foundation…' : 'Demo code: JH472K'}
           </motion.p>
         )}
       </AnimatePresence>
       <Button
         variant="secondary"
         onClick={() => {
-          setCode('NS472K')
+          setCode('JH472K')
           playSound('copy')
         }}
       >
@@ -228,7 +228,7 @@ export function JoinFound() {
             <Icon name="clinic" size={24} />
           </span>
           <div className="flex flex-col">
-            <span className="type-headline text-ink">Northside Health</span>
+            <span className="type-headline text-ink">Jewish Healthcare Foundation</span>
             <span className="type-footnote text-ink-2">Endocrinology · Remote monitoring</span>
           </div>
         </div>
@@ -246,9 +246,9 @@ export function JoinFound() {
           </div>
         ))}
       </Card>
-      <p className="type-subhead text-ink-2">Northside will see your glucose readings, alerts and logs. Next you’ll choose what else to share.</p>
+      <p className="type-subhead text-ink-2">Jewish Healthcare Foundation will see your glucose readings, alerts and logs. Next you’ll choose what else to share.</p>
       <Bottom>
-        <Button onClick={() => nav.push('consent')}>Yes, join Northside</Button>
+        <Button onClick={() => nav.push('consent')}>Yes, join JHF</Button>
         <Button variant="plain" onClick={nav.back}>
           This isn’t my clinic
         </Button>
@@ -268,7 +268,7 @@ export function Consent() {
       <p className="type-body text-ink-2">You’re in control. You can change this any time in Me › Privacy.</p>
       <div className="rounded-lg border border-line bg-surface">
         {[
-          { k: 'team', t: 'Northside care team', d: 'Readings, alerts, logs and trends. Needed for the program.', on: true, locked: true },
+          { k: 'team', t: 'JHF care team', d: 'Readings, alerts, logs and trends. Needed for the program.', on: true, locked: true },
           { k: 'circle', t: 'Your care circle', d: 'Only urgent alerts, never your history.', on: state.consent.circle },
           { k: 'research', t: 'Research (anonymous)', d: 'Helps improve hypoglycemia care. No name, no contact.', on: state.consent.research },
         ].map((r, i) => (
@@ -482,7 +482,7 @@ export function CgmFailed() {
       <Bottom>
         <Button variant="secondary">Open Dexcom</Button>
         <Button onClick={() => nav.replace('cgm-connecting')}>Try again</Button>
-        <Button variant="plain">Get help from Northside</Button>
+        <Button variant="plain">Get help from JHF</Button>
       </Bottom>
     </Screen>
   )
@@ -926,7 +926,7 @@ export function Protected() {
     ['Dexcom G7 connected', 'New reading every 5 minutes', 'ok'],
     [`Alerts at ${state.levels.low} and 54 mg/dL`, state.criticalAlerts === 'allowed' ? 'Urgent lows get through on silent' : 'Critical Alerts are off', state.criticalAlerts === 'allowed' ? 'ok' : 'wait'],
     [state.maria === 'accepted' ? 'Maria accepted' : 'Maria invited', state.maria === 'accepted' ? 'She’ll be called if you don’t respond' : 'Waiting for her to accept', state.maria === 'accepted' ? 'ok' : 'wait'],
-    ['Northside care team linked', 'Dr. Wen Chen · Priya Shah, RN', 'ok'],
+    ['JHF care team linked', 'Dr. Wen Chen · Priya Shah, RN', 'ok'],
   ]
   return (
     <Screen>

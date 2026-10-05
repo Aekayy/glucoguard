@@ -19,9 +19,9 @@ export function Care() {
       <h1 className="type-large-title text-ink">Care</h1>
       <div className="flex flex-col gap-3 rounded-lg border border-line bg-surface p-4">
         <div className="flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-md bg-sage type-subhead-em text-ink">NH</span>
+          <span className="flex size-11 items-center justify-center rounded-md bg-sage type-subhead-em text-ink">JH</span>
           <div className="flex flex-col">
-            <span className="type-headline text-ink">Northside Health</span>
+            <span className="type-headline text-ink">Jewish Healthcare Foundation</span>
             <span className="type-footnote text-ink-2">Dr. Wen Chen · Priya Shah, RN</span>
           </div>
         </div>
@@ -29,7 +29,7 @@ export function Care() {
           <Button variant="secondary" onClick={() => nav.push('messages')}>
             <Icon name="msg" size={18} /> Message
           </Button>
-          <Button variant="secondary" onClick={() => toast({ message: 'Calling Northside on-call nurse…', state: 'info' })}>
+          <Button variant="secondary" onClick={() => toast({ message: 'Calling the JHF on-call nurse…', state: 'info' })}>
             <Icon name="phone" size={18} /> Call
           </Button>
         </div>
@@ -114,7 +114,7 @@ export function Messages() {
   return (
     <Screen bg="surface" gap={10} className="px-4">
       <NavBar onBack={nav.back} back="Care" title="Priya Shah, RN" />
-      <p className="text-center type-caption1 text-ink-2">Northside Health · usually replies within 1 business day</p>
+      <p className="text-center type-caption1 text-ink-2">Jewish Healthcare Foundation · usually replies within 1 business day</p>
       <div className="flex flex-col gap-2.5">
         <AnimatePresence initial={false}>
           {state.messages.map((m, i) =>
@@ -369,7 +369,7 @@ export function Me() {
         <Avatar initials="DO" size={56} className="type-title3" />
         <div className="flex flex-col">
           <span className="type-title3 text-ink">Denise Okafor</span>
-          <span className="type-footnote text-ink-2">Type 2 · insulin · Northside Health</span>
+          <span className="type-footnote text-ink-2">Type 2 · insulin · Jewish Healthcare Foundation</span>
         </div>
       </div>
       <div className="rounded-lg border border-line bg-surface px-4 py-0.5">

@@ -20,7 +20,7 @@ import { Checkbox, Sidebar, TopBar, WebField, type NavId } from './web'
 /* ── Sign in (S1 / S2 / S3) ───────────────────────────────── */
 function SignIn({ onDone }: { onDone: () => void }) {
   const [step, setStep] = useState<'creds' | 'mfa'>('creds')
-  const [email, setEmail] = useState('priya.shah@northside.org')
+  const [email, setEmail] = useState('priya.shah@jhf.org')
   const [password, setPassword] = useState('')
   const [ssoError, setSsoError] = useState(false)
   const [busy, setBusy] = useState(false)
@@ -80,21 +80,21 @@ function SignIn({ onDone }: { onDone: () => void }) {
             ))}
           </div>
         </div>
-        <span className="mt-auto type-small opacity-70">Northside Health · Endocrinology remote monitoring</span>
+        <span className="mt-auto type-small opacity-70">Jewish Healthcare Foundation · Endocrinology remote monitoring</span>
       </div>
       <div className="flex flex-1 items-center justify-center bg-canvas">
         <motion.div key={step} initial={{ opacity: 0, transform: 'translateY(8px)' }} animate={{ opacity: 1, transform: 'translateY(0)' }} transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }} className="flex w-[400px] flex-col gap-[18px]">
           {step === 'creds' ? (
             <>
               <h2 className="type-display text-ink">Sign in to Care Console</h2>
-              <p className="type-wbody text-ink-2">Use your Northside Health account.</p>
+              <p className="type-wbody text-ink-2">Use your Jewish Healthcare Foundation (JHF) account.</p>
               {ssoError ? (
                 <Banner type="error" size="web" title="Your account isn’t set up for GlucoGuard yet">
                   Ask your admin to add you to the “GlucoGuard RPM” group in Okta. Reference SSO-403.
                 </Banner>
               ) : null}
               <Button size="web" className="w-full" onClick={sso} disabled={busy}>
-                {busy ? 'Redirecting to Okta…' : 'Continue with Northside SSO'}
+                {busy ? 'Redirecting to Okta…' : 'Continue with JHF SSO'}
               </Button>
               <div className="flex items-center gap-3">
                 <span className="h-px flex-1 bg-line" />
@@ -109,7 +109,7 @@ function SignIn({ onDone }: { onDone: () => void }) {
                   setSsoError(false)
                 }}
                 error={ssoError ? 'This account isn’t in the GlucoGuard RPM group.' : null}
-                helper="Demo: try new.hire@northside.org to see the SSO error."
+                helper="Demo: try new.hire@jhf.org to see the SSO error."
               />
               <WebField label="Password" type="password" value={password} onChange={setPassword} placeholder="Password" />
               <Button size="web" variant="outline" className="w-full" onClick={sso}>
@@ -375,7 +375,7 @@ function SignedIn({ route }: { route: string }) {
           }
           setSignedIn(true)
           if (route === 'signin' || route === '') go('console/queue')
-          toast({ message: 'Signed in · Northside Health', state: 'success' })
+          toast({ message: 'Signed in · Jewish Healthcare Foundation', state: 'success' })
         }}
       />
     )

@@ -255,7 +255,7 @@ export function Billing() {
         <Stat label="99458 · extra 20 min" value="57" />
       </div>
       {submitted ? (
-        <Banner type="success" size="web" title="141 claims sent to Northside billing · batch RPM-2026-09">
+        <Banner type="success" size="web" title="141 claims sent to JHF billing · batch RPM-2026-09">
           Sent Sep 30 at 4:12 PM. {fixes.length ? `${fixes.length} claim${fixes.length > 1 ? 's' : ''} need fixes before they can go.` : 'Every claim is through.'}
         </Banner>
       ) : (
@@ -336,7 +336,7 @@ export function Billing() {
       <Modal
         open={confirm}
         onClose={() => setConfirm(false)}
-        title={`Submit ${readyCount} claims to Northside billing?`}
+        title={`Submit ${readyCount} claims to JHF billing?`}
         description="Each claim includes the data days and interactive minutes as evidence. You can still fix individual claims afterwards."
         footer={
           <>

@@ -163,7 +163,7 @@ function Stage({ beat, reduce }: { beat: Beat; reduce: boolean }) {
         {(
           [
             [22, 'Home', 'Chicago · Grand Ave'],
-            [272, 'Northside Health', 'endocrinology'],
+            [272, 'JHF care team', 'Jewish Healthcare Foundation'],
             [522, 'Supplier & payer', 'outside the clinic'],
           ] as const
         ).map(([x, label, sub]) => (
@@ -502,7 +502,7 @@ function Snippet({ snip }: { snip: Snip }) {
 }
 
 /* ── Player ────────────────────────────────────────────────── */
-export function NightStory() {
+function Player() {
   const reduce = useReducedMotion() ?? false
   const root = useRef<HTMLElement>(null)
   const inView = useInView(root, { amount: 0.35 })
@@ -532,10 +532,7 @@ export function NightStory() {
       className="flex flex-col gap-4"
     >
       <div className="flex items-end justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <span className="type-eyebrow text-ink-2">The story in one night</span>
-          <span className="type-h1 text-ink">One low, six people, one record</span>
-        </div>
+        <StepHeading n={2} eyebrow="What happens" title="The night, moment by moment" />
         <div className="flex items-center gap-1.5">
           <button type="button" aria-label="Previous moment" onClick={() => go(i - 1)} className="flex size-9 items-center justify-center rounded-full border border-line bg-surface text-ink hover:bg-canvas">
             <Icon name="chevL" size={18} />
@@ -627,5 +624,143 @@ export function NightStory() {
         ))}
       </div>
     </section>
+  )
+}
+
+/* ── Cast, problem, solution ──────────────────────────────── */
+const CAST: { id: ActorId; full: string; role: string; part: string }[] = [
+  { id: 'denise', full: 'Denise Okafor, 67', role: 'Patient', part: 'Has type 2 diabetes, uses insulin and lives alone. Her blood sugar drops dangerously low while she sleeps.' },
+  { id: 'maria', full: 'Maria Okafor', role: 'Daughter · caregiver', part: 'Lives 12 minutes away and doesn’t have the app. She gets a text and goes to help.' },
+  { id: 'priya', full: 'Priya Shah, RN', role: 'Night care coordinator', part: 'A nurse at Jewish Healthcare Foundation watching alerts for 214 patients. She sees the low and takes charge.' },
+  { id: 'chen', full: 'Dr. Wen Chen', role: 'Physician', part: 'Denise’s doctor. The next morning he adjusts her dose and reorders her glucose sensors.' },
+  { id: 'harbor', full: 'Harbor Home Medical', role: 'Medical supply company', part: 'Ships Denise’s sensors once the order is signed. No fax, no phone calls.' },
+  { id: 'medicare', full: 'Medicare', role: 'Insurer (payer)', part: 'Confirms the sensors are covered and pays for the remote monitoring that kept Denise safe.' },
+]
+
+function StepHeading({ n, eyebrow, title }: { n: number; eyebrow: string; title: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink type-wbody-em text-surface">{n}</span>
+      <div className="flex flex-col">
+        <span className="type-eyebrow text-ink-2">{eyebrow}</span>
+        <span className="type-h1 text-ink">{title}</span>
+      </div>
+    </div>
+  )
+}
+
+const reveal = {
+  initial: { opacity: 0, transform: 'translateY(10px)' },
+  whileInView: { opacity: 1, transform: 'translateY(0)' },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] as const },
+}
+
+function Cast() {
+  return (
+    <div className="flex flex-col gap-3">
+      <span className="type-eyebrow text-ink-2">Meet the people</span>
+      <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {CAST.map((c, i) => {
+          const a = ACTORS[c.id]
+          return (
+            <motion.div
+              key={c.id}
+              {...reveal}
+              transition={{ ...reveal.transition, delay: i * 0.05 }}
+              className="flex gap-3 rounded-md border border-line bg-surface p-4"
+            >
+              <span
+                className={cn(
+                  'relative flex size-11 shrink-0 items-center justify-center rounded-full type-subhead-em',
+                  a.tone === 'brand' && 'bg-brand text-on-brand',
+                  a.tone === 'sage' && 'bg-sage text-ink',
+                  a.tone === 'neutral' && 'bg-sunken text-ink',
+                )}
+              >
+                {a.initials}
+                <span className="absolute -right-1 -bottom-1 flex size-5 items-center justify-center rounded-full border-2 border-surface bg-surface text-brand">
+                  <Icon name={a.icon} size={11} />
+                </span>
+              </span>
+              <span className="flex min-w-0 flex-col gap-0.5">
+                <span className="type-wbody-em text-ink">{c.full}</span>
+                <span className="w-fit rounded-full bg-tint px-2 py-px type-small-em text-brand">{c.role}</span>
+                <span className="mt-1 type-small text-ink-2">{c.part}</span>
+              </span>
+            </motion.div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function PointCards({ points, tone }: { points: [IconName, string, string][]; tone: 'problem' | 'solution' }) {
+  return (
+    <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-1">
+      {points.map(([icon, t, d]) => (
+        <div key={t} className={cn('flex gap-3 rounded-md p-3.5', tone === 'problem' ? 'bg-vlow-tint/60' : 'bg-inr-tint/70')}>
+          <Icon name={icon} size={20} className={cn('mt-0.5 shrink-0', tone === 'problem' ? 'text-vlow' : 'text-inr')} />
+          <span className="flex flex-col gap-0.5">
+            <span className="type-wbody-em text-ink">{t}</span>
+            <span className="type-small text-ink-2">{d}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Problem() {
+  return (
+    <motion.div {...reveal} className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-5">
+      <StepHeading n={1} eyebrow="The problem" title="An alarm that only one sleeping person can hear" />
+      <PointCards
+        tone="problem"
+        points={[
+          ['belloff', 'One phone, often on silent', 'A low at 3 a.m. can turn dangerous in minutes, and the alert only reaches Denise.'],
+          ['people', 'Nobody else knows', 'Maria finds out in the morning. The clinic sees it days later.'],
+          ['file', 'Follow-up gets stuck', 'Her sensor reorder bounces between fax, phone and insurer while supplies run out.'],
+        ]}
+      />
+    </motion.div>
+  )
+}
+
+function Solution() {
+  return (
+    <motion.div {...reveal} className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-5">
+      <StepHeading n={3} eyebrow="The solution" title="GlucoGuard turns one alert into a shared plan" />
+      <PointCards
+        tone="solution"
+        points={[
+          ['bell', 'Alerts escalate on their own', 'Denise first, then Maria, then the care team, and 911 only if nobody answers.'],
+          ['care', 'Everyone sees the same facts', 'Maria’s text, Denise’s phone and Priya’s queue all show one shared record.'],
+          ['checkc', 'Follow-up without paperwork', 'Dose change, sensor order and billing flow through the same system. No fax.'],
+        ]}
+      />
+      <div className="flex items-center gap-2.5 rounded-md bg-tint px-4 py-3">
+        <Icon name="checkc" size={20} className="shrink-0 text-brand" />
+        <span className="type-wbody-em text-ink">
+          The result: Denise was confirmed safe 16 minutes after the first alert, and 911 never had to come.
+        </span>
+      </div>
+    </motion.div>
+  )
+}
+
+export function NightStory() {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-1">
+        <span className="type-eyebrow text-ink-2">The story in one night</span>
+        <span className="type-display text-ink">One low, six people, one record</span>
+      </div>
+      <Cast />
+      <Problem />
+      <Player />
+      <Solution />
+    </div>
   )
 }

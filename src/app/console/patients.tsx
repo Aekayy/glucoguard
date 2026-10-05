@@ -340,7 +340,7 @@ export function Enroll() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="type-small text-ink-2">Join code</span>
-                      <span className="type-display tracking-[2px] text-ink">NS4 · 72K</span>
+                      <span className="type-display tracking-[2px] text-ink">JH4 · 72K</span>
                       <span className="type-wbody text-ink-2">Texted in Spanish to (773) 555-0149. Rosa can also scan this code at her next visit.</span>
                     </div>
                   </div>

@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useMemo, useState, type ReactNo
 /* ─────────────────────────────────────────────────────────
  * Patient app state + navigation.
  * One small store, because every screen in the story reads the
- * same facts (Denise, Maria, Northside) — the prototype never
+ * same facts (Denise, Maria, Jewish Healthcare Foundation) — the prototype never
  * contradicts itself.
  * ───────────────────────────────────────────────────────── */
 

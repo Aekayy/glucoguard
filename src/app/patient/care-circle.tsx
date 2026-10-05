@@ -32,7 +32,7 @@ type Person = { initials: string; label: string; angle: number; tone: 'sage' | '
 
 const PEOPLE: Person[] = [
   { initials: 'MO', label: 'Maria', angle: -146, tone: 'sage', reach: 0.18 },
-  { initials: 'NR', label: 'Care team', angle: -26, tone: 'neutral', reach: 0.24 },
+  { initials: 'JH', label: 'Care team', angle: -26, tone: 'neutral', reach: 0.24 },
   { initials: '911', label: '911', angle: 46, tone: 'neutral', reach: 0.3 },
 ]
 
