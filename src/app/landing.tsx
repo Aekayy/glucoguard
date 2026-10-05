@@ -1,22 +1,11 @@
 import { motion } from 'motion/react'
 import { useEffect } from 'react'
 
+import { NightStory } from '@/app/night-story'
 import { CareCircleIllustration } from '@/app/patient/care-circle'
 import { HeldMark, Icon } from '@/components/icons'
 import { Chip } from '@/components/hearth/ios'
 import { SoundToggle } from '@/components/ui/sound'
-
-const BEATS: [string, string, string][] = [
-  ['3:03', 'Denise’s CGM reads 58 and falling. GlucoGuard alerts her.', 'Patient app'],
-  ['3:13', 'No reply. A Critical Alert sounds through silent mode.', 'Patient app'],
-  ['3:18', 'Maria, her daughter, gets a call and an SMS. No app needed.', 'Caregiver'],
-  ['3:18', 'Priya, the night coordinator, sees why it fired and takes over.', 'Care Console'],
-  ['3:19', 'Maria replies 1. 911 pauses. Denise holds to confirm she’s OK.', 'Both'],
-  ['3:34', 'Priya resolves the alert; the RPM record writes itself.', 'Care Console'],
-  ['10:12', 'Dr. Chen reorders sensors with Medicare criteria checked live.', 'Care Console'],
-  ['10:16', 'Harbor Home Medical gets one packet. Nothing is faxed.', 'Supplier'],
-  ['Sep 30', 'The visit counts toward RPM billing: 99454 and 99457.', 'Payer'],
-]
 
 export function Landing() {
   useEffect(() => {
@@ -92,27 +81,7 @@ export function Landing() {
           </a>
         </section>
 
-        <section className="flex flex-col gap-4">
-          <span className="type-eyebrow text-ink-2">The story in one night</span>
-          <ol className="grid grid-cols-3 gap-3 max-lg:grid-cols-1">
-            {BEATS.map(([time, text, who], i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, transform: 'translateY(8px)' }}
-                whileInView={{ opacity: 1, transform: 'translateY(0)' }}
-                viewport={{ once: true }}
-                transition={{ delay: (i % 3) * 0.05, duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                className="flex flex-col gap-2 rounded-md border border-line bg-surface p-4"
-              >
-                <span className="flex items-center gap-2">
-                  <span className="type-wnum text-ink">{time}</span>
-                  <span className="rounded-full bg-sunken px-2 py-0.5 type-small-em text-ink-2">{who}</span>
-                </span>
-                <span className="type-wbody text-ink">{text}</span>
-              </motion.li>
-            ))}
-          </ol>
-        </section>
+        <NightStory />
       </main>
     </div>
   )
