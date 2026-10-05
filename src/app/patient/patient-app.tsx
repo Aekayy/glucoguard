@@ -83,11 +83,17 @@ function Device() {
   const light = LIGHT_CHROME.includes(nav.screen)
   const dir = reduce ? 0 : nav.dir
 
+  /* lets the walkthrough tell the live screen from one still animating out */
+  useEffect(() => {
+    document.body.dataset.liveScreen = nav.screen
+  }, [nav.screen])
+
   return (
     <div className={cn('relative h-[852px] w-[393px] overflow-hidden rounded-[47px] bg-canvas text-ink', state.night && 'dark')} style={{ colorScheme: state.night ? 'dark' : 'light' }}>
       <AnimatePresence initial={false} custom={dir}>
         <motion.div
           key={nav.stack.length + nav.screen}
+          data-screen={nav.screen}
           custom={dir}
           className="absolute inset-0 bg-canvas"
           variants={{

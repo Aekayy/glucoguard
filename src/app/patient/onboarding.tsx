@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Glyph, HeldMark, Icon, type IconName } from '@/components/icons'
 import { Avatar, Banner, Card, Chip, Field, NavBar, Progress, Row, Rows, Segmented, StatusCircle, Toggle } from '@/components/hearth/ios'
@@ -15,10 +15,16 @@ import { usePatient } from './state'
 /* O1 · Launch */
 export function Launch() {
   const { nav } = usePatient()
+  const { replace } = nav
+  /* only advance if Launch is still the live screen (a flow may have jumped ahead) */
+  const current = useRef(nav.screen)
+  current.current = nav.screen
   useEffect(() => {
-    const t = setTimeout(() => nav.replace('welcome'), 1800)
+    const t = setTimeout(() => {
+      if (current.current === 'launch') replace('welcome')
+    }, 1800)
     return () => clearTimeout(t)
-  }, [nav])
+  }, [replace])
   return (
     <button type="button" onClick={() => nav.replace('welcome')} className="absolute inset-0 flex flex-col items-center bg-brand px-8 pb-10 text-white">
       <div className="flex flex-1 flex-col items-center justify-center gap-4">
@@ -139,6 +145,7 @@ export function Account() {
 /* O4 · Join program — 6-character clinic code (Input OTP) + O4e / O4s */
 export function Join() {
   const { nav } = usePatient()
+  const { push } = nav
   const [code, setCode] = useState('')
   const [status, setStatus] = useState<'idle' | 'checking' | 'invalid' | 'ok'>('idle')
 
@@ -148,14 +155,18 @@ export function Join() {
       return
     }
     setStatus('checking')
+    let next: ReturnType<typeof setTimeout> | undefined
     const t = setTimeout(() => {
       if (code === 'JH472K') {
         setStatus('ok')
-        setTimeout(() => nav.push('join-found'), 750)
+        next = setTimeout(() => push('join-found'), 750)
       } else setStatus('invalid')
     }, 900)
-    return () => clearTimeout(t)
-  }, [code, nav])
+    return () => {
+      clearTimeout(t)
+      clearTimeout(next)
+    }
+  }, [code, push])
 
   return (
     <Screen>
@@ -398,6 +409,7 @@ export function Cgm() {
 
 export function CgmConnecting() {
   const { nav, state, set } = usePatient()
+  const { replace } = nav
   const [step, setStep] = useState(0)
   const fails = state.connectAttempts === 0
   useEffect(() => {
@@ -407,13 +419,15 @@ export function CgmConnecting() {
         if (fails) {
           set({ connectAttempts: 1 })
           playSound('error')
-          nav.replace('cgm-failed')
+          replace('cgm-failed')
         } else setStep(2)
       }, 2100),
-      !fails ? setTimeout(() => nav.replace('cgm-connected'), 3200) : undefined,
+      !fails ? setTimeout(() => replace('cgm-connected'), 3200) : undefined,
     ]
     return () => timers.forEach((t) => t && clearTimeout(t))
-  }, [fails, nav, set])
+    // run once per visit: `fails` is read at mount on purpose
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [replace, set])
 
   const steps: [string][] = [['Signed in to Dexcom'], ['Checking data sharing is on'], ['Reading your last 24 hours']]
   return (

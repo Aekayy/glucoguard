@@ -97,29 +97,28 @@ export function PatientProvider({ children, start = 'launch' }: { children: Reac
     setState((s) => ({ ...s, ...(typeof patch === 'function' ? patch(s) : patch) }))
   }, [])
 
+  /* actions are stable, so a screen's timers never restart when another
+   * screen navigates (a screen animating out keeps its effects alive) */
+  const push = useCallback((id: ScreenId) => {
+    setDir(1)
+    setStack((s) => [...s, id])
+  }, [])
+  const replace = useCallback((id: ScreenId) => {
+    setDir(1)
+    setStack((s) => [...s.slice(0, -1), id])
+  }, [])
+  const back = useCallback(() => {
+    setDir(-1)
+    setStack((s) => (s.length > 1 ? s.slice(0, -1) : s))
+  }, [])
+  const reset = useCallback((id: ScreenId, d: Dir = 0) => {
+    setDir(d)
+    setStack([id])
+  }, [])
+
   const nav = useMemo<Nav>(
-    () => ({
-      stack,
-      screen: stack[stack.length - 1],
-      dir,
-      push: (id) => {
-        setDir(1)
-        setStack((s) => [...s, id])
-      },
-      replace: (id) => {
-        setDir(1)
-        setStack((s) => [...s.slice(0, -1), id])
-      },
-      back: () => {
-        setDir(-1)
-        setStack((s) => (s.length > 1 ? s.slice(0, -1) : s))
-      },
-      reset: (id, d = 0) => {
-        setDir(d)
-        setStack([id])
-      },
-    }),
-    [stack, dir],
+    () => ({ stack, screen: stack[stack.length - 1], dir, push, replace, back, reset }),
+    [stack, dir, push, replace, back, reset],
   )
 
   const restart = useCallback(() => {

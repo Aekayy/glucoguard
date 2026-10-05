@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { useEffect } from 'react'
 
 import { NightStory } from '@/app/night-story'
+import { WalkthroughButton } from '@/app/walkthrough/walkthrough'
 import { CareCircleIllustration } from '@/app/patient/care-circle'
 import { HeldMark, Icon } from '@/components/icons'
 import { Chip } from '@/components/hearth/ios'
@@ -39,6 +40,12 @@ export function Landing() {
               One 3 a.m. low, followed across six people: the patient, her daughter, a night coordinator, a physician, a
               supplier and a payer. A patient iPhone app and a care-team console, built on one design system.
             </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <WalkthroughButton />
+              <a href="#/app" className="inline-flex h-12 items-center rounded-full border border-line bg-surface px-5 type-wbody-em text-ink transition-colors hover:bg-canvas">
+                Try it yourself
+              </a>
+            </div>
             <div className="flex flex-wrap gap-2">
               <Chip state="veryLow" size="web">Very low</Chip>
               <Chip state="low" size="web">Low</Chip>
